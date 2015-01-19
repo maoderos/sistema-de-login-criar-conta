@@ -1,9 +1,6 @@
 from tkinter import *
 
 def criar_conta():
- 
-    
-
 
 
 root = Tk()
