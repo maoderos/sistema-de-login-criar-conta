@@ -1,9 +1,7 @@
 from tkinter import *
 
 def criar_conta():
-    file = open('contas.txt', 'w')
-    file.write('%s:%s' % (user_new.get(), password_new.get()))
-    root.destroy()
+    
     
 
 
