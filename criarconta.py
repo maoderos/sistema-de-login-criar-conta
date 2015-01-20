@@ -28,4 +28,7 @@ Label(root, text="digite seu endereço de email:").pack()
 email_new = StringVar()
 new_email = Entry(root, textvariable=email_new).pack() 
 Button(root, text='Criar conta', command= criar_conta).pack()
+Button(root, text="sair", command= root.destroy).pack()
+
+root.mainloop()
  
