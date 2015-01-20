@@ -34,6 +34,7 @@ new_password = Entry(root, textvariable=password_new).pack()
 
 Label(root, text="digite seu endereço de email:").pack()
 email_new = StringVar()
+
 new_email = Entry(root, textvariable=email_new).pack()
 
 stats = StringVar()
@@ -42,3 +43,11 @@ Button(root, text='Criar conta', command= conta_criar).pack()
 Button(root, text="sair", command=root.destroy).pack()
 
 root.mainloop() 
+
+new_email = Entry(root, textvariable=email_new).pack() 
+Button(root, text='Criar conta', command= criar_conta).pack()
+Button(root, text="sair", command= root.destroy).pack()
+
+root.mainloop()
+ 
+
