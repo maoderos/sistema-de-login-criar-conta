@@ -1,37 +1,50 @@
 ''' interface do submit - usuario/senha'''
 from tkinter import *
-
+import sqlite3
 
 def conta_criar():
     import criarconta
 
- 
-
-
 def login():
- 
+    try:
+     con = sqlite3.connect('login.sqlite')
+     cursor = con.cursor()
+     cursor.execute('SELECT senha FROM ids WHERE id = "%s"' % usuario.get())
+     dados = cursor.fetchall()
+     dados_str = str(dados)
+    
+     (nada, senhas, nad) = dados_str.strip().split("'")
+     if senha.get() == senhas:
+         incorrect.set('login concluido!')
+     else:
+         incorrect.set('seu ID ou senha estao incorretos')
+     con.close()
+    except:
+         incorrect.set("seu ID ou senha estao incorretos")
+         con.close()
+       
 
 
  
-app = Tk()
-app.title("i dont know yet")
-Label(app, text = "Por favor digite seu login e senha").pack()
-Label(app, text = "Login:").pack()
+appli = Tk()
+appli.title("i dont know yet")
+Label(appli, text = "Por favor digite seu login e senha").pack()
+Label(appli, text = "Login:").pack()
 
 usuario = StringVar()
-usuario_entry = Entry(app, textvariable = usuario)
+usuario_entry = Entry(appli, textvariable = usuario)
 usuario_entry.pack()
 
 
-Label(app, text = "senha:").pack()
+Label(appli, text = "senha:").pack()
 senha = StringVar()
-senha_entry = Entry(app, textvariable = senha)
+senha_entry = Entry(appli, textvariable = senha)
 senha_entry.pack()
 
 incorrect = StringVar()
-Label(app, textvariable = incorrect).pack()
-Button(app, text='entrar', command=login).pack(side=LEFT)
-Button(app, text='crie uma conta', command=conta_criar).pack(side=RIGHT)
+Label(appli, textvariable = incorrect).pack()
+Button(appli, text='entrar', command=login ).pack(side=LEFT)
+#Button(appli, text='crie uma conta', command=conta_criar).pack(side=RIGHT)
 
-app.mainloop()
 
+appli.mainloop()
