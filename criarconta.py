@@ -1,3 +1,4 @@
+#cria conta e salva as mesmas no banco de dados
 from tkinter import *
 import sqlite3
 
