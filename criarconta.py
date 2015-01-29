@@ -1,48 +1,52 @@
 #cria conta e salva as mesmas no banco de dados
-from tkinter import *
+import tkinter 
 import sqlite3
 
 
-def conta_criar():
-    try:
-        con = sqlite3.connect('login.sqlite')
-        cursor = con.cursor()
-        cursor.execute("""
+class Criar_conta(tkinter.Tk):
+    def __init__(self):
+        tkinter.Tk.__init__(self)
+        self.initialize()
+
+    def initialize(self):
+        self.user_new = tkinter.StringVar()
+        self.password_new = tkinter.StringVar()
+        self.email_new = tkinter.StringVar()
+        self.check_create = tkinter.StringVar()
+        self.labl1 = tkinter.Label(self, text='Digite seu ID').pack()
+        self.entry = tkinter.Entry(self, textvariable=self.user_new).pack()
+        self.labl2 = tkinter.Label(self, text='Digite sua senha').pack()
+        self.entry2 = tkinter.Entry(self, textvariable=self.password_new).pack()
+        self.labl3 = tkinter.Label(self, text='Digite seu email').pack()
+        self.entry3 = tkinter.Entry(self, textvariable=self.email_new).pack()
+        self.labl4 = tkinter.Label(self, textvariable=self.check_create).pack()
+        self.button = tkinter.Button(self, text='criar conta', command=self.create_account).pack(side=tkinter.RIGHT)
+        self.button2 = tkinter.Button(self, text="sair", command=self.sair).pack(side = tkinter.LEFT)
+        
+    def create_account(self):
+        try:
+            self.con = sqlite3.connect('login.sqlite')
+            self.cursor = self.con.cursor()
+            self.cursor.execute("""
                        INSERT INTO ids(id, senha, email)
                        VALUES (?,?,?)""",
-                       (user_new.get(),
-                        password_new.get(),
-                        email_new.get()))
-        con.commit()
-        stats.set('sua conta foi criada com sucesso')
-        con.close()
-    except Exception as err:
-        stats.set(str(err))
-        con.close()
-      
+                       (self.user_new.get(),
+                        self.password_new.get(),
+                        self.email_new.get()))
+            self.con.commit()
+            self.check_create.set('sua conta foi criada com sucesso')
+            self.con.close()
 
+        except Exception as err:
+            self.check_create.set(str(err))
+            self.con.commit()
+            self.con.close()
 
-root = Tk()
-root.title('Crie sua conta')
-Label(root, text="digite seu ID:").pack()
-
-user_new = StringVar()
-new_user= Entry(root, textvariable= user_new).pack()
-Label(root, text="digite sua senha:").pack()
-
-password_new = StringVar()
-new_password = Entry(root, textvariable=password_new).pack()
-
-Label(root, text="digite seu endereço de email:").pack()
-email_new = StringVar()
-
-new_email = Entry(root, textvariable=email_new).pack()
-
-stats = StringVar()
-Label(root, textvariable=stats).pack()
-Button(root, text='Criar conta', command= conta_criar).pack()
-Button(root, text="sair", command=root.destroy).pack()
-
-root.mainloop() 
-
- 
+    def sair(self):
+        self.root = root
+        self.root.destroy()
+    
+root = Criar_conta()
+root.title('criar conta')
+root.mainloop()
+            
