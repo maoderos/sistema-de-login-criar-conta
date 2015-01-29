@@ -47,6 +47,7 @@ class Login(tkinter.Tk):
         
             
 app = Login()
+app.title('login')
 app.mainloop()
 
 
