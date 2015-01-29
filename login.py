@@ -17,8 +17,11 @@ class Login(tkinter.Tk):
         self.entry2 = tkinter.Entry(self, textvariable=self.senha).pack()
         self.check = tkinter.StringVar()
         self.labl4 = tkinter.Label(self, textvariable=self.check).pack()
-        self.button = tkinter.Button(self, text='entrar', command=self.fazer_login).pack()
-        #self.button2 = tkinter.Button(self, text='Criar conta', """commmand=conta_criar""").pack(side=RIGHT)
+        self.button = tkinter.Button(self, text='entrar', command=self.fazer_login).pack(side=tkinter.LEFT)
+        #self.button2 = tkinter.Button(self, text='Criar conta', command=self.criar_conta).pack(side = tkinter.RIGHT)
+
+    def criar_conta(self):
+         pass
 
     def fazer_login(self):
         try:
@@ -27,19 +30,26 @@ class Login(tkinter.Tk):
             self.cursor.execute('SELECT senha FROM ids WHERE id = "%s"' % self.usuario.get())
             self.dados = self.cursor.fetchall()
             self.dados_str = str(self.dados)
-
-            (self.nda, self.senhas, self,nad) = self.dados_str.strip().split("'")
-            print(self.senhas)
-            """if self.senha.get() == self.senhas:
-                print(legal)"""
+            
+            (self.nda, self.senhas, self.nad) = self.dados_str.strip().split("'")
+            
+            if self.senha.get() == self.senhas:
+                self.check.set('login concluido!')
+                self.con.close()
+            else:
+                self.check("seu ID ou senha estao incorretos")
+                self.con.close()
+                
         except Exception as err:
-            print(err)
+            self.check.set('seu ID ou senha estao incorretos')
+            self.con.close()
+     
         
-
+            
 app = Login()
-app.title('Login')
-
 app.mainloop()
+
+
 
 
 
