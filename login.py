@@ -11,7 +11,7 @@ class Login(tkinter.Tk):
         self.usuario = tkinter.StringVar()
         self.senha = tkinter.StringVar()
         self.labl1 = tkinter.Label(self, text="Por favor digite seu login e senha").pack()
-        self.labl2 = tkinter.Label(self, text="Login:")
+        self.labl2 = tkinter.Label(self, text="Login:")pack()
         self.entry1 = tkinter.Entry(self, textvariable=self.usuario).pack()
         self.labl3 = tkinter.Label(self, text='senha:').pack()
         self.entry2 = tkinter.Entry(self, textvariable=self.senha).pack()
