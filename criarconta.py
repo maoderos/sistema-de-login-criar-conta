@@ -48,5 +48,6 @@ class Criar_conta(tkinter.Tk):
     
 root = Criar_conta()
 root.title('criar conta')
+root.geometry("220x200")
 root.mainloop()
             
